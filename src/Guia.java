@@ -41,18 +41,20 @@ public class Guia {
         if (nombre == null) {
             throw new IllegalArgumentException("El nombre no puede ser nulo, por favor escriba un nombre para el guia");
         }
-        //Como segundo paso se valida si el nombre dado esta dentro de los caracteres que se colocaron en el Regex
+        //Como segundo paso se valida si el nombre dado está dentro de los caracteres que se colocaron en el Regex
         String cleanName = nombre.trim();
         if (!NOMBRE_VALIDO.matcher(cleanName).matches()) {
             throw new IllegalArgumentException("Nombre inválido: " + nombre);
         }
-        this.nombre = cleanName; /* Si cumple con todo lo anterior entonces se le asigna correctamente el nombre como parametro a la variable nombre */
+        this.nombre = cleanName; /* Si cumple con todo lo anterior entonces se le asigna correctamente el nombre como parámetro a la variable nombre */
     }
 
     public void setIdioma(String idioma) {
+        //Se valida primero si el idioma es nulo
         if (idioma == null) {
             throw new IllegalArgumentException("El idioma no puede ser nulo");
         }
+        //Luego se valida que el idioma no quede vacio una vez quitados los espacios
         if (idioma.trim().isEmpty()) {
             throw new IllegalArgumentException("El idioma no puede estar vacío");
         }
@@ -60,11 +62,22 @@ public class Guia {
     }
 
     public void setAniosExperiencia(int aniosExperiencia) {
-        if (aniosExperiencia < 1) {
-            throw new IllegalArgumentException("Los años de experiencia deben ser al menos 1");
+        //Se valida primero que los años de experiencia no sean menores a 0. Un guía recien egresado puede laborar en la agencia.
+        if (aniosExperiencia < 0) {
+            throw new IllegalArgumentException("Los años de experiencia no pueden ser negativos");
+        }
+        //Como segundo paso se valida que los años de experiencia no superen un valor realista
+        if (aniosExperiencia > 57) {
+            throw new IllegalArgumentException("Los años de experiencia no pueden superar los 57");
         }
         this.aniosExperiencia = aniosExperiencia;
     }
 
     //Methods
+
+    @Override
+    public String toString() {
+        //Se muestra la información del guia en un formato legible para el usuario final
+        return nombre + " — Idioma: " + idioma + " | Experiencia: " + aniosExperiencia + " años";
+    }
 }
