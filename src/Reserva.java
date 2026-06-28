@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.regex.Pattern;
 
 public class Reserva {
@@ -72,5 +73,19 @@ public class Reserva {
             );
         }
         this.pago = pago;
+    }
+
+    //Methods
+
+    public double calcularTotal() {
+        return tour.getPrecio() * cantidadPersonas;
+    }
+
+    public void registrarPago(double valor, String metodo, LocalDate fecha) {
+        Pago pago = new Pago(valor, metodo, fecha);
+    }
+
+    public boolean estaPago() {
+        return pago != null;
     }
 }

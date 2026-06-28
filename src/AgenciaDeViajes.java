@@ -65,4 +65,33 @@ public class AgenciaDeViajes {
     }
 
     //Methods
+
+    public void agregarTour(Tour tour) {
+        this.tours.add(tour);
+    }
+
+    public void registrarCliente(Cliente cliente) {
+        this.clientes.add(cliente);
+    }
+
+    public void agregarGuia(Guia guia) {
+        this.guias.add(guia);
+    }
+
+    public Reserva crearReserva(String codReserva, Cliente cliente, Tour tour, int cantidadPersonas, Pago pago) {
+        Reserva reserva = new Reserva(codReserva, cliente, tour, cantidadPersonas, pago);
+        return this.reservas.add(reserva);
+    }
+
+    public void mostrarCatalogo(){
+
+    }
+
+    public void listarReservas(){
+
+    }
+
+    public Tour buscarTourPorCodigo(String codigo){
+
+    }
 }

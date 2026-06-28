@@ -58,34 +58,52 @@ public class Cliente {
     }
 
     public void setCedula(String cedula) {
-        if  (cedula == null) {
-            throw new IllegalArgumentException("La cedula no puede ser nula, por favo ingrese un numero de cedula valido");
+        //Se valida que la cedula no venga nula para evitar un error más adelante
+        if (cedula == null) {
+            throw new IllegalArgumentException("La cédula no puede ser nula, por favor ingrese un número de cédula válido");
         }
-        if (!CEDULA_VALIDA.matcher(cedula).matches()) {
-            throw new IllegalArgumentException("Cédula inválida: " + cedula + " Por favor ingrese un numero de cedula valido sin guiones o letras");
+        //Se limpian los espacios por si el usuario escribio alguno sin querer antes o después del número
+        String cleanCedula = cedula.trim();
+        //Luego se valida que la cedula tenga exactamente el formato que pide el Regex (9 dígitos sin guiones ni letras)
+        if (!CEDULA_VALIDA.matcher(cleanCedula).matches()) {
+            throw new IllegalArgumentException("Cédula inválida: " + cedula + ". Por favor ingrese un número de cédula válido sin guiones ni letras");
         }
-        this.cedula = cedula;
+        this.cedula = cleanCedula; /* Si pasa todas las validaciones, se asigna la cedula ya limpia a la variable */
     }
 
     public void setCorreo(String correo) {
+        //Se valida que el correo no venga nulo
         if (correo == null) {
             throw new IllegalArgumentException("El correo no puede ser nulo");
         }
-        if (!CORREO_VALIDO.matcher(correo.trim()).matches()) {
+        //Se limpian espacios por si el usuario dejo alguno al inicio o al final
+        String cleanCorreo = correo.trim();
+        //Se valida que el correo cumpla con la estructura de un correo válido según el Regex
+        if (!CORREO_VALIDO.matcher(cleanCorreo).matches()) {
             throw new IllegalArgumentException("Correo inválido: " + correo);
         }
-        this.correo = correo.trim();
+        this.correo = cleanCorreo; /* Si todo esta correcto, se guarda el correo ya limpio */
     }
 
     public void setTelefono(String telefono) {
+        //Se valida que el telefono no venga nulo
         if (telefono == null) {
             throw new IllegalArgumentException("El teléfono no puede ser nulo");
         }
-        if (!TELEFONO_VALIDO.matcher(telefono).matches()) {
+        //Se limpian espacios por si el usuario escribio alguno sin querer
+        String cleanTelefono = telefono.trim();
+        //Luego se valida que el telefono cumpla con el formato de un número costarricense según el Regex
+        if (!TELEFONO_VALIDO.matcher(cleanTelefono).matches()) {
             throw new IllegalArgumentException("Teléfono inválido: " + telefono);
         }
-        this.telefono = telefono;
+        this.telefono = cleanTelefono; /* Si pasa la validacion, se guarda el telefono ya limpio */
     }
 
     //Methods
+
+    @Override
+    public String toString() {
+        //Se muestra la información del cliente en un formato legible para el usuario final
+        return nombre + " — Cédula: " + cedula + " | Tel: " + telefono + " | Correo: " + correo;
+    }
 }

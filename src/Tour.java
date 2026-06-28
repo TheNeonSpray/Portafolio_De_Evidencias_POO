@@ -119,4 +119,12 @@ public abstract class Tour {
      * Cada subclase lo implementa según sus propias reglas.
      */
     public abstract double getPrecio();
+
+    public void mostrarInformacion() {
+        System.out.println("Nombre del tour: " + this.nombre);
+        System.out.println("Precio Base: " + this.precioBase);
+        System.out.println("Capacidad maxima: " + this.capacidadMaxima);
+        System.out.println("Destino: " + this.destino);
+        System.out.println("Guia: " + this.guia);
+    }
 }
