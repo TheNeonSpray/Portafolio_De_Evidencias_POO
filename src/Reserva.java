@@ -107,7 +107,6 @@ public class Reserva {
                 " — Cliente: " + cliente.getNombre() +
                 " | Tour: " + tour.getNombre() +
                 " | Personas: " + cantidadPersonas +
-                " | Total: ₡" + calcularTotal() +
-                " | Estado: " + (estaPago() ? "Pagada" : "Pendiente");
+                " | Total: ₡" + calcularTotal();
     }
 }
