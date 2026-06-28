@@ -28,9 +28,11 @@ public class TourAventura extends Tour {
 
     // Setters
     public void setNivelDificultad(String nivelDificultad) {
+        //Se valida primero si el nivel de dificultad es nulo
         if (nivelDificultad == null) {
             throw new IllegalArgumentException("El nivel de dificultad no puede ser nulo");
         }
+        //Luego se normaliza el texto para aceptar mayusculas o minusculas y se valida que sea uno de los niveles permitidos
         String nivelNormalizado = normalizeNivel(nivelDificultad.trim());
         if (!NIVELES.contains(nivelNormalizado)) {
             throw new IllegalArgumentException("Nivel inválido, debe ser: Bajo, Medio o Alto");
@@ -43,7 +45,9 @@ public class TourAventura extends Tour {
      * Ejemplo: "BAJO" → "Bajo", "medio" → "Medio"
      */
     private String normalizeNivel(String nivel) {
+        //Se devuelve el texto tal cual si esta vacio, para evitar errores al tomar el primer caracter
         if (nivel.isEmpty()) return nivel;
+        //Se pone la primera letra en mayuscula y el resto en minuscula
         return Character.toUpperCase(nivel.charAt(0)) + nivel.substring(1).toLowerCase();
     }
 
@@ -54,6 +58,16 @@ public class TourAventura extends Tour {
     // Métodos
     @Override
     public double getPrecio() {
+        //Si el tour requiere equipo especial se le suma el costo extra al precio base, si no se cobra solo el precio base
         return requiereEquipoEspecial ? getPrecioBase() + COSTO_EQUIPO_ESPECIAL : getPrecioBase();
+    }
+
+    @Override
+    public String toString() {
+        //Se reutiliza el toString del padre y se le agregan los datos propios del tour de aventura
+        return super.toString() +
+                " | Tipo: Aventura" +
+                " | Dificultad: " + nivelDificultad +
+                " | Equipo especial: " + (requiereEquipoEspecial ? "Sí" : "No");
     }
 }
