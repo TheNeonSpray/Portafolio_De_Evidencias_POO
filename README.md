@@ -92,7 +92,7 @@ El proyecto implementa los cuatro tipos de relación entre clases:
 `TourAventura` y `TourCultural` **extienden** a `Tour`. Ambas reutilizan los atributos comunes mediante `super(...)` e implementan el método abstracto `getPrecio()` con su propia regla de negocio.
 
 ### Composición *(rombo relleno)*
-`Reserva ◆—— Pago`. El pago se crea dentro de la reserva y es obligatorio en su constructor. El pago no existe fuera de la reserva: nace y muere con ella.
+`Reserva ◆—— Pago`. Toda reserva exige un Pago obligatorio: el constructor de Reserva no acepta un pago nulo y además válida que el monto cubra el total de la reserva. El pago carece de sentido fuera de la reserva a la que pertenece: nace junto con ella y deja de tener significado si la reserva desaparece.
 
 ### Agregación *(rombo hueco)*
 - `AgenciaDeViajes ◇—— Tour`, `Cliente`, `Guia`, `Reserva` (las administra en listas).
@@ -112,7 +112,8 @@ A diferencia de la composición, las partes existen por su cuenta: un guía o un
 ## Cómo ejecutar el proyecto
 
 ### Requisitos
-- Java JDK 17 o superior (se usa el operador `switch ->` y `Set.of(...)`).
+- Java JDK 17 o superior (se usa el operador switch -> y Set.of(...)).
+-  IntelliJ IDEA (recomendado) o cualquier IDE compatible con Java.
 
 ### Pasos
 
@@ -121,20 +122,13 @@ A diferencia de la composición, las partes existen por su cuenta: un guía o un
    git clone https://github.com/TheNeonSpray/Portafolio_De_Evidencias_POO.git
    ```
 
-2. Entrar a la carpeta del proyecto:
-   ```bash
-   cd Portafolio_De_Evidencias_POO
-   ```
+2. Abrir la carpeta del proyecto en IntelliJ IDEA.
 
-3. Compilar todas las clases:
-   ```bash
-   javac *.java
-   ```
+3. Esperar a que el IDE indexe el proyecto y configure el JDK 17.
 
-4. Ejecutar el programa:
-   ```bash
-   java Main
-   ```
+4. Abrir la clase Main y pulsar el botón Run (▶).
+
+El programa inicia en la consola con los datos de ejemplo precargados.
 
 ---
 
